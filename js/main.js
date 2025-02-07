@@ -44,7 +44,7 @@ function refreshAllDataSources() {
 function toggleRefresh() {
     if (!isRefreshing) {
         // Iniciar intervalo
-        refreshInterval = setInterval(refreshAllDataSources, 60000); // 30 segundos
+        refreshInterval = setInterval(refreshAllDataSources, 300000); // 5 minutos
 
         document.getElementById('toggleRefresh').textContent = "Parar Auto-Refresh";
         isRefreshing = true;
