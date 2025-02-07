@@ -4,7 +4,8 @@ let worksheet;
 
 // Inicializar a extensão
 tableau.extensions.initializeAsync().then(() => {
-    document.getElementById('status').textContent = "Conectado";
+    // document.getElementById('status').textContent = "Conectado";
+    document.getElementById('toggleRefresh').textContent = "Parar Auto-Refresh";
     initWorksheet();
 });
 
@@ -40,7 +41,7 @@ function refreshAllDataSources() {
 function toggleRefresh() {
     if (!isRefreshing) {
         // Iniciar intervalo
-        refreshInterval = setInterval(refreshAllDataSources() , 10000); // 30 segundos
+        refreshInterval = setInterval(refreshAllDataSources() , 30000); // 30 segundos
 
         document.getElementById('toggleRefresh').textContent = "Parar Auto-Refresh";
         isRefreshing = true;
