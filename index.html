@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Refresh Extension</title>
+    <style>
+        body {
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="config">
+        <p>Status: <span id="status">Desconectado</span></p>
+        <button id="toggleRefresh">Iniciar Auto-Refresh</button>
+    </div>
+
+
+    <!-- Inclua a Tableau Extensions API -->
+    <script src="js/tableau.extensions.1.latest.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
