@@ -11,9 +11,9 @@
       <url>https://jasoniel.github.io/dhauzrefreshall/</url>
     </source-location>
     <icon></icon>
-    <permissions>
+    <!-- <permissions>
       <permission>full data</permission>
-    </permissions>
+    </permissions> -->
   </dashboard-extension>
   <resources>
     <resource id="name">

@@ -23,6 +23,7 @@ function refreshAllDataSources() {
     const dashboard = tableau.extensions.dashboardContent.dashboard;
 
     dashboard.worksheets.forEach(function (worksheet) {
+        console.log("Atualizando ",worksheet)
         dataSourceFetchPromises.push(worksheet.getDataSourcesAsync());
     });
 
@@ -31,6 +32,8 @@ function refreshAllDataSources() {
             dataSourcesForWorksheet.forEach(function (dataSource) {
                 if (!dashboardDataSources[dataSource.id]) {
                     dashboardDataSources[dataSource.id] = dataSource;
+                    console.log("Atualizando datasource",worksheet)
+
                     dataSource.refreshAsync();
                 }
             });
@@ -41,7 +44,7 @@ function refreshAllDataSources() {
 function toggleRefresh() {
     if (!isRefreshing) {
         // Iniciar intervalo
-        refreshInterval = setInterval(refreshAllDataSources() , 30000); // 30 segundos
+        refreshInterval = setInterval(refreshAllDataSources, 60000); // 30 segundos
 
         document.getElementById('toggleRefresh').textContent = "Parar Auto-Refresh";
         isRefreshing = true;
