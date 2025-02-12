@@ -11,9 +11,7 @@ tableau.extensions.initializeAsync().then(() => {
 
 // Configurar a worksheet
 async function initWorksheet() {
-    const dashboard = tableau.extensions.dashboardContent.dashboard;
-    worksheet = dashboard.worksheets.find(w => w.name === 'Main page'); // Altere para o nome da sua worksheet
-    
+    const dashboard = tableau.extensions.dashboardContent.dashboard;    
     document.getElementById('toggleRefresh').addEventListener('click', toggleRefresh);
     toggleRefresh();
 }
@@ -23,7 +21,6 @@ function refreshAllDataSources() {
     const dashboard = tableau.extensions.dashboardContent.dashboard;
 
     dashboard.worksheets.forEach(function (worksheet) {
-        console.log("Atualizando ",worksheet)
         dataSourceFetchPromises.push(worksheet.getDataSourcesAsync());
     });
 
@@ -32,8 +29,6 @@ function refreshAllDataSources() {
             dataSourcesForWorksheet.forEach(function (dataSource) {
                 if (!dashboardDataSources[dataSource.id]) {
                     dashboardDataSources[dataSource.id] = dataSource;
-                    console.log("Atualizando datasource",worksheet)
-
                     dataSource.refreshAsync();
                 }
             });
