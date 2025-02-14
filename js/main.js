@@ -13,11 +13,8 @@ tableau.extensions.initializeAsync().then(() => {
     dashboard.findParameterAsync("P_REFRESH_FREQUENCY").then(function(param){ 
         TIME_PERIOD = parseFloat(param.currentValue.value) || 5;
         TIME_PERIOD_DEFINITION = (TIME_PERIOD == 0 ? 5 : TIME_PERIOD) * 60000;
-        document.getElementById('time').textContent = TIME_PERIOD_DEFINITION;
     }).catch((err) => {
         TIME_PERIOD_DEFINITION = TIME_PERIOD * 60000;
-        document.getElementById('time').textContent = TIME_PERIOD_DEFINITION;
-
       });     
     initWorksheet();
 });
