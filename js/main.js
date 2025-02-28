@@ -1,23 +1,44 @@
 let refreshInterval;
 let isRefreshing = false;
 let worksheet;
-let TIME_PERIOD = 5 //MINUTES
-let TIME_PERIOD_DEFINITION =  300000; //CONVERT IN MILLISECONDS
+let TIME_PERIOD = 5 
+let TIME_PERIOD_DEFINITION = 43200000 //300000; 
+const PARAMETER_NAME = "P_REFRESH_FREQUENCY"
 
 // Inicializar a extensão
 tableau.extensions.initializeAsync().then(() => {
-    // document.getElementById('status').textContent = "Conectado";
+    // Alterar o texto para indicar que a conexão foi bem-sucedida
     document.getElementById('toggleRefresh').textContent = "Parar Auto-Refresh";
-    const dashboard = tableau.extensions.dashboardContent.dashboard;   
+    const dashboard = tableau.extensions.dashboardContent.dashboard;
 
-    dashboard.findParameterAsync("P_REFRESH_FREQUENCY").then(function(param){ 
+    // Recupera o parâmetro de "P_REFRESH_FREQUENCY" para pegar o valor inicial
+    dashboard.findParameterAsync(PARAMETER_NAME).then(function(param) {
         TIME_PERIOD = parseFloat(param.currentValue.value) || 5;
         TIME_PERIOD_DEFINITION = (TIME_PERIOD == 0 ? 5 : TIME_PERIOD) * 60000;
+
+        // Escutando qualquer alteração no parâmetro
+        param.addEventListener(tableau.TableauEventType.ParameterChanged,onParameterChange);
+
     }).catch((err) => {
         TIME_PERIOD_DEFINITION = TIME_PERIOD * 60000;
-      });     
+    });
+
     initWorksheet();
 });
+
+
+function onParameterChange(event){       
+
+        event.getParameterAsync().then(function (param) {
+            if (param.name == PARAMETER_NAME) {
+                const newTimePeriod = parseFloat(param.currentValue.value) || 5;
+                TIME_PERIOD = newTimePeriod;
+                TIME_PERIOD_DEFINITION = (TIME_PERIOD == 0 ? 5 : TIME_PERIOD) * 60000;
+                console.log("Novo valor do parâmetro P_REFRESH_FREQUENCY: ", TIME_PERIOD);
+            }
+
+        })
+}
 
 // Configurar a worksheet
 async function initWorksheet() {
