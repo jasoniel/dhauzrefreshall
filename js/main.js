@@ -1,8 +1,8 @@
 let refreshInterval;
 let isRefreshing = false;
 let worksheet;
-let TIME_PERIOD = 720
-let TIME_PERIOD_DEFINITION = 43200000 //300000; 
+let TIME_PERIOD = 5 
+let TIME_PERIOD_DEFINITION =  300000; 
 const PARAMETER_NAME = "P_REFRESH_FREQUENCY"
 
 // Inicializar a extensão
